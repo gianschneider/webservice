@@ -17,7 +17,13 @@ for line in file:
 
 file.close()
 
-@app.get("/search")
+
+@app.get("/")
+async def root():
+    return {"Version": "1.0"}
+
+
+@app.get("/search/{gemeinde}")
 async def search(gemeinde: str):
     if gemeinde in d:
         return d[gemeinde]
@@ -25,4 +31,4 @@ async def search(gemeinde: str):
         return {"fehler":"nicht gefunden"}
 
 if __name__=="__main__":
-    uvicorn.run(app, host="127.0.0.1", port=50618)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
